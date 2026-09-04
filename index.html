@@ -244,6 +244,8 @@
       box-shadow: 0 20px 60px rgba(2, 132, 199, 0.3);
       backdrop-filter: blur(10px);
       animation: slideUp 0.3s ease;
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     .modal h3 {
@@ -292,6 +294,7 @@
 
     .password-section {
       margin-bottom: 20px;
+      display: none;
     }
 
     .password-input {
@@ -327,6 +330,7 @@
       color: #38bdf8;
       text-decoration: underline;
       transition: all 0.3s;
+      word-break: break-all;
     }
 
     .modal a:hover {
@@ -362,30 +366,120 @@
     }
 
     .pay-btn {
-      background: linear-gradient(135deg, #16a34a, #15803d);
-    }
-
-    .pay-btn:hover:not(:disabled) {
-      background: linear-gradient(135deg, #15803d, #22c55e);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(22, 163, 74, 0.4);
-    }
-
-    .pay-btn:disabled {
       background: linear-gradient(135deg, #6b7280, #4b5563);
       cursor: not-allowed;
       opacity: 0.6;
     }
 
-    .payment-pending {
+    .pay-btn:not(:disabled) {
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    .pay-btn:not(:disabled):hover {
+      background: linear-gradient(135deg, #15803d, #22c55e);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(22, 163, 74, 0.4);
+    }
+
+    .pay-btn:disabled:active {
+      pointer-events: auto;
+    }
+
+    .not-paid-warning {
       display: none;
-      color: #fbbf24;
-      font-size: 0.85rem;
+      color: #f87171;
       margin-top: 10px;
-      padding: 10px;
-      background: rgba(251, 191, 36, 0.1);
-      border-left: 3px solid #fbbf24;
+      padding: 12px;
+      background: rgba(239, 68, 68, 0.1);
+      border-left: 4px solid #f87171;
       border-radius: 5px;
+      font-size: 0.9rem;
+      animation: shake 0.3s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .payment-section {
+      display: none;
+    }
+
+    .step-indicator {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .step-number {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #334155;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #94a3b8;
+    }
+
+    .step.completed .step-number {
+      background: #16a34a;
+      color: #fff;
+    }
+
+    .step.active .step-number {
+      background: #0284c7;
+      color: #fff;
+    }
+
+    .step-label {
+      color: #94a3b8;
+      text-align: center;
+    }
+
+    .step.completed .step-label {
+      color: #16a34a;
+    }
+
+    .step.active .step-label {
+      color: #0284c7;
+    }
+
+    .step-line {
+      flex: 1;
+      height: 2px;
+      background: #334155;
+      margin: 0 10px;
+    }
+
+    .step-line.completed {
+      background: #16a34a;
+    }
+
+    .payment-info {
+      background: rgba(51, 65, 85, 0.5);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 15px 0;
+      border-left: 4px solid #fbbf24;
+    }
+
+    .payment-info p {
+      margin: 8px 0;
     }
 
     .error-message {
@@ -426,6 +520,17 @@
       .modal {
         max-width: 90%;
         padding: 25px 20px;
+      }
+
+      .step-indicator {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .step-line {
+        width: 2px;
+        height: 30px;
+        margin: 10px 0;
       }
     }
   </style>
@@ -504,23 +609,54 @@
     </div>
 
     <!-- Admin Password Section -->
-    <div id="adminSection" class="password-section">
+    <div id="adminSection" class="password-section" style="display: block;">
       <input type="password" id="adminPassword" class="password-input" placeholder="Masukkan password admin" autocomplete="off">
       <button class="admin-btn" onclick="submitAdminPassword()">Verifikasi</button>
       <div class="error-message" id="adminError"></div>
     </div>
 
     <!-- Payment Section -->
-    <div id="paymentSection" style="display: none;">
-      <p>Biaya perhitungan berikutnya: <b>Rp15.000</b></p>
-      <p style="font-size: 0.85rem; color: #94a3b8;">
-        Pembayaran melalui DANA: 
-        <a href="https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012092026090425377151" target="_blank">
-          Klik untuk Bayar via DANA
-        </a>
-      </p>
-      <button class="pay-btn" id="confirmPayBtn" onclick="confirmPayment()" disabled>✓ Saya Sudah Bayar</button>
-      <div class="payment-pending" id="paymentPending">⏳ Sedang menunggu pembayaran...</div>
+    <div id="paymentSection" class="payment-section">
+      <div class="step-indicator">
+        <div class="step completed" id="step1">
+          <div class="step-number">✓</div>
+          <div class="step-label">Opsi Dipilih</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step active" id="step2">
+          <div class="step-number">2</div>
+          <div class="step-label">Bayar via DANA</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" id="step3">
+          <div class="step-number">3</div>
+          <div class="step-label">Konfirmasi</div>
+        </div>
+      </div>
+
+      <div class="payment-info">
+        <p><strong>Biaya:</strong> <span style="color: #fbbf24; font-size: 1.1rem;">Rp15.000</span></p>
+        <p style="font-size: 0.85rem; color: #94a3b8; margin: 0;">Pembayaran via DANA</p>
+      </div>
+
+      <p style="margin: 20px 0;">👇 Klik tombol di bawah untuk membayar:</p>
+      
+      <a href="https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012092026090425377151" target="_blank" style="display: inline-block; width: 100%;">
+        <button style="width: 100%; background: linear-gradient(135deg, #0284c7, #0369a1); padding: 14px; font-size: 1rem; margin-bottom: 15px;">
+          💳 Buka Link Pembayaran DANA
+        </button>
+      </a>
+
+      <p style="font-size: 0.85rem; color: #94a3b8;">Setelah selesai bayar, klik tombol "Konfirmasi Pembayaran" di bawah</p>
+
+      <button class="pay-btn" id="confirmPayBtn" onclick="attemptConfirmPayment()" disabled>
+        ✓ Konfirmasi Pembayaran
+      </button>
+      
+      <div class="not-paid-warning" id="notPaidWarning">
+        ⚠️ Anda belum melakukan pembayaran!<br>
+        Silakan klik link pembayaran DANA terlebih dahulu.
+      </div>
     </div>
   </div>
 </div>
@@ -530,6 +666,7 @@
   
   let isAdmin = false;
   let selectedOption = 'admin';
+  let paymentConfirmed = false;
   let calculationCount = 0;
   const MAX_CALCULATIONS = 1;
 
@@ -567,7 +704,7 @@
       paymentOption.classList.add('selected');
       adminSection.style.display = 'none';
       paymentSection.style.display = 'block';
-      // Aktifkan tombol bayar
+      paymentConfirmed = false;
       updatePaymentButton();
     }
   }
@@ -592,25 +729,60 @@
 
   function updatePaymentButton() {
     const confirmPayBtn = document.getElementById('confirmPayBtn');
-    const paymentPending = document.getElementById('paymentPending');
-    
-    // Simulasi: button aktif setelah user klik link pembayaran (dalam kasus ini kita buat bisa diaktifkan)
-    // Untuk demo, kita buat button selalu aktif di opsi pembayaran
+    const notPaidWarning = document.getElementById('notPaidWarning');
+
+    confirmPayBtn.disabled = !paymentConfirmed;
+    notPaidWarning.style.display = 'none';
+  }
+
+  function attemptConfirmPayment() {
+    const confirmPayBtn = document.getElementById('confirmPayBtn');
+    const notPaidWarning = document.getElementById('notPaidWarning');
+
+    if (!paymentConfirmed) {
+      notPaidWarning.style.display = 'block';
+      setTimeout(() => {
+        notPaidWarning.style.display = 'none';
+      }, 3000);
+      return;
+    }
+
+    confirmPayment();
+  }
+
+  // Simulasi pengguna membuka link DANA
+  window.addEventListener('blur', () => {
+    if (selectedOption === 'payment' && payModal.style.display === 'flex') {
+      setTimeout(() => {
+        paymentConfirmed = true;
+        updatePaymentButtonUI();
+      }, 2000);
+    }
+  });
+
+  function updatePaymentButtonUI() {
+    const confirmPayBtn = document.getElementById('confirmPayBtn');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+    const stepLine2 = document.querySelectorAll('.step-line')[1];
+
     confirmPayBtn.disabled = false;
+    step2.classList.remove('active');
+    step2.classList.add('completed');
+    step3.classList.add('active');
+    stepLine2.classList.add('completed');
   }
 
   function confirmPayment() {
     const confirmPayBtn = document.getElementById('confirmPayBtn');
-    const paymentPending = document.getElementById('paymentPending');
 
     confirmPayBtn.disabled = true;
     confirmPayBtn.textContent = '⏳ Memproses...';
-    paymentPending.style.display = 'block';
 
-    // Simulasi verifikasi pembayaran
     setTimeout(() => {
-      alert("✓ Pembayaran Rp15.000 berhasil dikonfirmasi!\n\nKamu dapat 1x kesempatan menghitung lagi.");
+      alert("✅ Pembayaran Rp15.000 berhasil dikonfirmasi!\n\n🎉 Kamu dapat 1x kesempatan menghitung lagi.");
       calculationCount = 0;
+      paymentConfirmed = false;
       closePayModal();
       resetPayModal();
     }, 1500);
@@ -625,8 +797,18 @@
     document.getElementById('adminPassword').value = '';
     document.getElementById('adminError').style.display = 'none';
     document.getElementById('confirmPayBtn').disabled = true;
-    document.getElementById('confirmPayBtn').textContent = '✓ Saya Sudah Bayar';
-    document.getElementById('paymentPending').style.display = 'none';
+    document.getElementById('confirmPayBtn').textContent = '✓ Konfirmasi Pembayaran';
+    document.getElementById('notPaidWarning').style.display = 'none';
+    
+    // Reset step indicator
+    document.getElementById('step1').className = 'step completed';
+    document.getElementById('step2').className = 'step active';
+    document.getElementById('step3').className = 'step';
+    document.querySelectorAll('.step-line').forEach(line => {
+      line.classList.remove('completed');
+    });
+    document.querySelectorAll('.step-line')[1].classList.add('completed');
+    
     selectOption('admin');
   }
 
