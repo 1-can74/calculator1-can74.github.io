@@ -50,149 +50,39 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* LOGIN SCREEN */
-    .login-container {
-      display: none;
-      text-align: center;
-      background: rgba(30, 41, 59, 0.95);
-      padding: 40px 30px;
-      border-radius: 20px;
-      border: 2px solid #0284c7;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-      max-width: 400px;
-      width: 90%;
-      backdrop-filter: blur(10px);
-      animation: slideUp 0.5s ease;
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .login-container h1 {
-      margin: 0 0 10px 0;
-      font-size: 2rem;
-      background: linear-gradient(135deg, #0284c7, #38bdf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .login-container p {
-      color: #94a3b8;
-      margin-bottom: 30px;
-      font-size: 0.9rem;
-    }
-
-    .login-input {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 15px;
-      background: #0f172a;
-      border: 2px solid #334155;
-      border-radius: 10px;
-      color: #fff;
-      font-size: 1rem;
-      transition: all 0.3s;
-    }
-
-    .login-input:focus {
-      outline: none;
-      border-color: #0284c7;
-      box-shadow: 0 0 10px rgba(2, 132, 199, 0.3);
-    }
-
-    .login-btn {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #0284c7, #0369a1);
-      border: none;
-      border-radius: 10px;
-      color: #fff;
-      font-size: 1.1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s;
-      margin-top: 10px;
-    }
-
-    .login-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(2, 132, 199, 0.4);
-    }
-
-    .login-btn:active {
-      transform: translateY(0);
-    }
-
-    .error-message {
-      display: none;
-      color: #f87171;
-      margin-top: 15px;
-      padding: 10px;
-      background: rgba(239, 68, 68, 0.1);
-      border-left: 3px solid #f87171;
-      border-radius: 5px;
-      text-align: left;
-    }
-
     /* CALCULATOR */
     .main-container {
       display: none;
       text-align: center;
     }
 
-    .header {
-      margin-bottom: 30px;
+    .calculator {
+      background: rgba(30, 41, 59, 0.8);
+      padding: 30px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+      border: 2px solid rgba(2, 132, 199, 0.3);
+      backdrop-filter: blur(10px);
+      animation: slideUp 0.5s ease;
+    }
+
+    .calc-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
+      margin-bottom: 20px;
+      gap: 10px;
     }
 
-    .header-title {
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .header-title h1 {
+    .calc-header h1 {
       margin: 0;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       background: linear-gradient(135deg, #0284c7, #38bdf8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-    }
-
-    .header-title p {
-      margin: 5px 0 0 0;
-      color: #94a3b8;
-      font-size: 0.9rem;
-    }
-
-    .user-info {
-      background: rgba(51, 65, 85, 0.5);
-      padding: 12px 20px;
-      border-radius: 10px;
-      border: 1px solid #334155;
-      font-size: 0.9rem;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .user-info span {
-      color: #38bdf8;
-      font-weight: bold;
     }
 
     .logout-btn {
@@ -212,18 +102,6 @@
       transform: translateY(-2px);
     }
 
-    .calculator {
-      background: rgba(30, 41, 59, 0.8);
-      padding: 30px;
-      border-radius: 20px;
-      width: 100%;
-      max-width: 380px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-      border: 2px solid rgba(2, 132, 199, 0.3);
-      backdrop-filter: blur(10px);
-      animation: slideUp 0.5s ease;
-    }
-
     .display {
       width: 100%;
       height: 70px;
@@ -239,6 +117,9 @@
       font-weight: bold;
       box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
       transition: all 0.3s;
+      overflow: hidden;
+      word-wrap: break-word;
+      word-break: break-all;
     }
 
     .display:focus {
@@ -247,13 +128,13 @@
 
     .buttons {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
     }
 
     button {
-      padding: 18px;
-      font-size: 1.3rem;
+      padding: 16px;
+      font-size: 1.1rem;
       border: none;
       border-radius: 12px;
       background: linear-gradient(135deg, #334155, #475569);
@@ -295,12 +176,30 @@
 
     button.clear {
       background: linear-gradient(135deg, #dc2626, #b91c1c);
-      grid-column: span 2;
     }
 
     button.clear:hover {
       background: linear-gradient(135deg, #b91c1c, #ef4444);
       box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+    }
+
+    button.delete {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+    }
+
+    button.delete:hover {
+      background: linear-gradient(135deg, #d97706, #f97316);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    }
+
+    button.func {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      font-size: 0.9rem;
+    }
+
+    button.func:hover {
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
     }
 
     /* MODAL PEMBAYARAN */
@@ -323,12 +222,23 @@
       to { opacity: 1; }
     }
 
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .modal {
       background: rgba(30, 41, 59, 0.95);
       padding: 40px 30px;
       border-radius: 20px;
       text-align: center;
-      max-width: 350px;
+      max-width: 400px;
       width: 90%;
       border: 2px solid #0284c7;
       box-shadow: 0 20px 60px rgba(2, 132, 199, 0.3);
@@ -337,9 +247,69 @@
     }
 
     .modal h3 {
-      margin: 0 0 10px 0;
+      margin: 0 0 20px 0;
       color: #f43f5e;
       font-size: 1.5rem;
+    }
+
+    .payment-options {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-direction: column;
+    }
+
+    .option-card {
+      background: rgba(51, 65, 85, 0.5);
+      border: 2px solid #334155;
+      border-radius: 12px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .option-card:hover {
+      border-color: #0284c7;
+      background: rgba(51, 65, 85, 0.8);
+    }
+
+    .option-card.selected {
+      border-color: #0284c7;
+      background: rgba(2, 132, 199, 0.1);
+    }
+
+    .option-card h4 {
+      margin: 0 0 10px 0;
+      color: #38bdf8;
+      font-size: 1.1rem;
+    }
+
+    .option-card p {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+    }
+
+    .password-section {
+      margin-bottom: 20px;
+    }
+
+    .password-input {
+      width: 100%;
+      padding: 12px;
+      background: #0f172a;
+      border: 2px solid #334155;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s;
+      margin-bottom: 10px;
+    }
+
+    .password-input:focus {
+      outline: none;
+      border-color: #0284c7;
+      box-shadow: 0 0 10px rgba(2, 132, 199, 0.3);
     }
 
     .modal p {
@@ -350,7 +320,7 @@
 
     .modal b {
       color: #fbbf24;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
 
     .modal a {
@@ -363,50 +333,99 @@
       color: #0ea5e9;
     }
 
-    .pay-btn {
-      background: linear-gradient(135deg, #16a34a, #15803d);
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .admin-btn, .pay-btn {
+      flex: 1;
       color: white;
       border: none;
       padding: 12px 24px;
       border-radius: 10px;
       cursor: pointer;
-      margin-top: 20px;
-      width: 100%;
       font-weight: bold;
-      font-size: 1rem;
+      font-size: 0.95rem;
       transition: all 0.3s;
     }
 
-    .pay-btn:hover {
+    .admin-btn {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+    }
+
+    .admin-btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #0369a1, #0ea5e9);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(2, 132, 199, 0.4);
+    }
+
+    .pay-btn {
+      background: linear-gradient(135deg, #16a34a, #15803d);
+    }
+
+    .pay-btn:hover:not(:disabled) {
       background: linear-gradient(135deg, #15803d, #22c55e);
       transform: translateY(-2px);
       box-shadow: 0 10px 25px rgba(22, 163, 74, 0.4);
     }
 
+    .pay-btn:disabled {
+      background: linear-gradient(135deg, #6b7280, #4b5563);
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .payment-pending {
+      display: none;
+      color: #fbbf24;
+      font-size: 0.85rem;
+      margin-top: 10px;
+      padding: 10px;
+      background: rgba(251, 191, 36, 0.1);
+      border-left: 3px solid #fbbf24;
+      border-radius: 5px;
+    }
+
+    .error-message {
+      display: none;
+      color: #f87171;
+      margin-top: 15px;
+      padding: 10px;
+      background: rgba(239, 68, 68, 0.1);
+      border-left: 3px solid #f87171;
+      border-radius: 5px;
+      font-size: 0.9rem;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 600px) {
-      .header {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .user-info {
-        justify-content: center;
-      }
-
       .calculator {
         width: 100%;
         padding: 20px;
+        max-width: 100%;
+      }
+
+      .buttons {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+      }
+
+      button {
+        padding: 12px;
+        font-size: 0.95rem;
       }
 
       .display {
         height: 60px;
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+        padding: 10px;
       }
 
-      button {
-        padding: 15px;
-        font-size: 1.1rem;
+      .modal {
+        max-width: 90%;
+        padding: 25px 20px;
       }
     }
   </style>
@@ -418,91 +437,106 @@
   <div class="loader"></div>
 </div>
 
-<!-- LOGIN SCREEN -->
-<div class="login-container" id="loginContainer">
-  <h1>🔐 Kalkulator Premium</h1>
-  <p>Masukkan password untuk melanjutkan</p>
-  
-  <input type="password" id="passwordInput" class="login-input" placeholder="Masukkan password" autocomplete="off">
-  
-  <button class="login-btn" onclick="handleLogin()">Masuk</button>
-  
-  <div class="error-message" id="errorMessage">
-    ⚠️ Password salah! Coba lagi.
-  </div>
-</div>
-
 <!-- CALCULATOR SCREEN -->
 <div class="main-container" id="mainContainer">
-  <div class="header">
-    <div class="header-title">
+  <div class="calculator">
+    <div class="calc-header">
       <h1>🧮 Kalkulator Premium</h1>
-      <p>Sistem Perhitungan Terbatas</p>
-    </div>
-    <div class="user-info">
-      <span id="userType">User Mode</span>
-      <span id="calculationCount">Hitung: 1/1</span>
       <button class="logout-btn" onclick="handleLogout()">Keluar</button>
     </div>
-  </div>
 
-  <div class="calculator">
     <input type="text" id="display" class="display" readonly placeholder="0">
     <div class="buttons">
+      <!-- Row 1 -->
       <button class="clear" onclick="clearDisplay()">C</button>
+      <button class="delete" onclick="deleteLastChar()">⌫</button>
+      <button class="func" onclick="appendNum('%')">%</button>
+      <button class="func" onclick="appendFunc('sqrt')">√</button>
       <button class="op" onclick="appendOp('/')">÷</button>
-      <button class="op" onclick="appendOp('*')">×</button>
-      
+
+      <!-- Row 2 -->
       <button onclick="appendNum('7')">7</button>
       <button onclick="appendNum('8')">8</button>
       <button onclick="appendNum('9')">9</button>
-      <button class="op" onclick="appendOp('-')">−</button>
-      
+      <button class="func" onclick="appendFunc('pow')">x²</button>
+      <button class="op" onclick="appendOp('*')">×</button>
+
+      <!-- Row 3 -->
       <button onclick="appendNum('4')">4</button>
       <button onclick="appendNum('5')">5</button>
       <button onclick="appendNum('6')">6</button>
-      <button class="op" onclick="appendOp('+')">+</button>
-      
+      <button class="func" onclick="appendFunc('pow3')">x³</button>
+      <button class="op" onclick="appendOp('-')">−</button>
+
+      <!-- Row 4 -->
       <button onclick="appendNum('1')">1</button>
       <button onclick="appendNum('2')">2</button>
       <button onclick="appendNum('3')">3</button>
-      <button class="equal" onclick="calculate()">=</button>
-      
+      <button class="func" onclick="toggleParenthesis()">()</button>
+      <button class="op" onclick="appendOp('+')">+</button>
+
+      <!-- Row 5 -->
       <button onclick="appendNum('0')" style="grid-column: span 2;">0</button>
-      <button class="op" onclick="appendNum('.')">,</button>
+      <button onclick="appendNum('.')">.</button>
+      <button class="equal" onclick="calculate()" style="grid-column: span 2;">=</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL PEMBAYARAN -->
+<!-- MODAL PEMBAYARAN / LOGIN ADMIN -->
 <div class="modal-overlay" id="payModal">
   <div class="modal">
     <h3>💳 Quota Perhitungan Habis!</h3>
-    <p>Anda telah mencapai batas perhitungan gratis</p>
-    <p>Biaya perhitungan berikutnya: <b>Rp15.000</b></p>
-    <p style="font-size: 0.85rem; color: #94a3b8;">
-      Pembayaran melalui DANA: 
-      <a href="https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012092026090425377151" target="_blank">
-        Klik untuk Bayar via DANA
-      </a>
-    </p>
-    <button class="pay-btn" onclick="simulasiBayar()">✓ Saya Sudah Bayar</button>
+    <p>Pilih salah satu opsi untuk melanjutkan</p>
+
+    <div class="payment-options">
+      <!-- Opsi 1: Admin Login -->
+      <div class="option-card selected" id="adminOption" onclick="selectOption('admin')">
+        <h4>👑 Masuk Sebagai Admin</h4>
+        <p>Masukkan password untuk akses unlimited</p>
+      </div>
+
+      <!-- Opsi 2: Bayar -->
+      <div class="option-card" id="paymentOption" onclick="selectOption('payment')">
+        <h4>💰 Bayar Rp15.000</h4>
+        <p>Dapatkan 1x kesempatan menghitung lagi</p>
+      </div>
+    </div>
+
+    <!-- Admin Password Section -->
+    <div id="adminSection" class="password-section">
+      <input type="password" id="adminPassword" class="password-input" placeholder="Masukkan password admin" autocomplete="off">
+      <button class="admin-btn" onclick="submitAdminPassword()">Verifikasi</button>
+      <div class="error-message" id="adminError"></div>
+    </div>
+
+    <!-- Payment Section -->
+    <div id="paymentSection" style="display: none;">
+      <p>Biaya perhitungan berikutnya: <b>Rp15.000</b></p>
+      <p style="font-size: 0.85rem; color: #94a3b8;">
+        Pembayaran melalui DANA: 
+        <a href="https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012092026090425377151" target="_blank">
+          Klik untuk Bayar via DANA
+        </a>
+      </p>
+      <button class="pay-btn" id="confirmPayBtn" onclick="confirmPayment()" disabled>✓ Saya Sudah Bayar</button>
+      <div class="payment-pending" id="paymentPending">⏳ Sedang menunggu pembayaran...</div>
+    </div>
   </div>
 </div>
 
 <script>
   const ADMIN_PASSWORD = "123456"; // Ubah password sesuai keinginan
   
-  let userMode = null; // 'admin' atau 'user'
-  let isPaid = true;
+  let isAdmin = false;
+  let selectedOption = 'admin';
   let calculationCount = 0;
   const MAX_CALCULATIONS = 1;
 
   const display = document.getElementById('display');
-  const loginContainer = document.getElementById('loginContainer');
-  const mainContainer = document.getElementById('mainContainer');
   const payModal = document.getElementById('payModal');
   const loadingScreen = document.getElementById('loadingScreen');
+  const mainContainer = document.getElementById('mainContainer');
 
   // Simulasi loading
   window.addEventListener('load', () => {
@@ -510,53 +544,90 @@
       loadingScreen.style.opacity = '0';
       setTimeout(() => {
         loadingScreen.style.display = 'none';
-        loginContainer.style.display = 'block';
+        mainContainer.style.display = 'block';
       }, 500);
     }, 1000);
   });
 
-  function handleLogin() {
-    const password = document.getElementById('passwordInput').value;
-    const errorMessage = document.getElementById('errorMessage');
+  function selectOption(option) {
+    selectedOption = option;
+    const adminOption = document.getElementById('adminOption');
+    const paymentOption = document.getElementById('paymentOption');
+    const adminSection = document.getElementById('adminSection');
+    const paymentSection = document.getElementById('paymentSection');
+
+    if (option === 'admin') {
+      adminOption.classList.add('selected');
+      paymentOption.classList.remove('selected');
+      adminSection.style.display = 'block';
+      paymentSection.style.display = 'none';
+      document.getElementById('adminPassword').focus();
+    } else {
+      adminOption.classList.remove('selected');
+      paymentOption.classList.add('selected');
+      adminSection.style.display = 'none';
+      paymentSection.style.display = 'block';
+      // Aktifkan tombol bayar
+      updatePaymentButton();
+    }
+  }
+
+  function submitAdminPassword() {
+    const password = document.getElementById('adminPassword').value;
+    const adminError = document.getElementById('adminError');
 
     if (password === ADMIN_PASSWORD) {
-      userMode = 'admin';
-      showCalculator();
-      errorMessage.style.display = 'none';
+      isAdmin = true;
+      adminError.style.display = 'none';
+      closePayModal();
+      resetPayModal();
     } else if (password === '') {
-      errorMessage.textContent = '⚠️ Masukkan password terlebih dahulu!';
-      errorMessage.style.display = 'block';
+      adminError.textContent = '⚠️ Masukkan password terlebih dahulu!';
+      adminError.style.display = 'block';
     } else {
-      userMode = 'user';
-      showCalculator();
-      errorMessage.style.display = 'none';
+      adminError.textContent = '❌ Password salah! Coba lagi.';
+      adminError.style.display = 'block';
     }
-
-    document.getElementById('passwordInput').value = '';
   }
 
-  function showCalculator() {
-    loginContainer.style.display = 'none';
-    mainContainer.style.display = 'block';
-    updateUserInfo();
-    display.focus();
+  function updatePaymentButton() {
+    const confirmPayBtn = document.getElementById('confirmPayBtn');
+    const paymentPending = document.getElementById('paymentPending');
+    
+    // Simulasi: button aktif setelah user klik link pembayaran (dalam kasus ini kita buat bisa diaktifkan)
+    // Untuk demo, kita buat button selalu aktif di opsi pembayaran
+    confirmPayBtn.disabled = false;
   }
 
-  function updateUserInfo() {
-    const userTypeEl = document.getElementById('userType');
-    const calculationCountEl = document.getElementById('calculationCount');
+  function confirmPayment() {
+    const confirmPayBtn = document.getElementById('confirmPayBtn');
+    const paymentPending = document.getElementById('paymentPending');
 
-    if (userMode === 'admin') {
-      userTypeEl.textContent = '👑 Admin Mode';
-      userTypeEl.style.color = '#fbbf24';
-      calculationCountEl.textContent = '🔓 Unlimited';
-      calculationCountEl.style.color = '#22c55e';
-    } else {
-      userTypeEl.textContent = '👤 User Mode';
-      userTypeEl.style.color = '#38bdf8';
-      calculationCountEl.textContent = `Hitung: ${calculationCount}/${MAX_CALCULATIONS}`;
-      calculationCountEl.style.color = calculationCount >= MAX_CALCULATIONS ? '#f87171' : '#38bdf8';
-    }
+    confirmPayBtn.disabled = true;
+    confirmPayBtn.textContent = '⏳ Memproses...';
+    paymentPending.style.display = 'block';
+
+    // Simulasi verifikasi pembayaran
+    setTimeout(() => {
+      alert("✓ Pembayaran Rp15.000 berhasil dikonfirmasi!\n\nKamu dapat 1x kesempatan menghitung lagi.");
+      calculationCount = 0;
+      closePayModal();
+      resetPayModal();
+    }, 1500);
+  }
+
+  function closePayModal() {
+    payModal.style.display = 'none';
+    clearDisplay();
+  }
+
+  function resetPayModal() {
+    document.getElementById('adminPassword').value = '';
+    document.getElementById('adminError').style.display = 'none';
+    document.getElementById('confirmPayBtn').disabled = true;
+    document.getElementById('confirmPayBtn').textContent = '✓ Saya Sudah Bayar';
+    document.getElementById('paymentPending').style.display = 'none';
+    selectOption('admin');
   }
 
   function appendNum(num) {
@@ -569,18 +640,41 @@
     }
   }
 
+  function appendFunc(func) {
+    if (func === 'sqrt') {
+      display.value += '√(';
+    } else if (func === 'pow') {
+      display.value += '**2';
+    } else if (func === 'pow3') {
+      display.value += '**3';
+    }
+  }
+
+  function toggleParenthesis() {
+    const lastChar = display.value.slice(-1);
+    if (lastChar === '(') {
+      display.value += ')';
+    } else {
+      display.value += '(';
+    }
+  }
+
   function clearDisplay() {
     display.value = '';
   }
 
+  function deleteLastChar() {
+    display.value = display.value.slice(0, -1);
+  }
+
   function calculate() {
-    // Admin mode tidak ada batasan
-    if (userMode === 'admin') {
+    // Admin tidak ada batasan
+    if (isAdmin) {
       performCalculation();
       return;
     }
 
-    // User mode dengan batasan
+    // User dengan batasan
     if (calculationCount >= MAX_CALCULATIONS) {
       payModal.style.display = 'flex';
       return;
@@ -588,58 +682,48 @@
 
     performCalculation();
     calculationCount++;
-    updateUserInfo();
   }
 
   function performCalculation() {
     try {
       if (display.value.trim() !== '') {
-        const result = eval(
-          display.value
-            .replace(/×/g, '*')
-            .replace(/÷/g, '/')
-            .replace(/−/g, '-')
-        );
-        display.value = Math.round(result * 100000000) / 100000000; // Hindari float errors
+        let expression = display.value
+          .replace(/×/g, '*')
+          .replace(/÷/g, '/')
+          .replace(/−/g, '-')
+          .replace(/√/g, 'Math.sqrt');
+
+        const result = eval(expression);
+        display.value = Math.round(result * 100000000) / 100000000;
       }
     } catch (e) {
-      display.value = 'Error: Input Tidak Valid';
+      display.value = 'Error';
       setTimeout(() => {
         display.value = '';
       }, 2000);
     }
   }
 
-  function simulasiBayar() {
-    alert("Pembayaran Rp15.000 berhasil dikonfirmasi! ✓\n\nKamu dapat 1x kesempatan menghitung lagi.");
-    calculationCount = 0;
-    payModal.style.display = 'none';
-    clearDisplay();
-    updateUserInfo();
-  }
-
   function handleLogout() {
-    userMode = null;
-    calculationCount = 0;
-    isPaid = true;
-    mainContainer.style.display = 'none';
-    loginContainer.style.display = 'block';
-    document.getElementById('passwordInput').value = '';
-    document.getElementById('errorMessage').style.display = 'none';
-    clearDisplay();
-  }
-
-  // Enter key untuk login
-  document.getElementById('passwordInput').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      handleLogin();
+    if (confirm('Yakin ingin keluar?')) {
+      isAdmin = false;
+      calculationCount = 0;
+      clearDisplay();
+      location.reload();
     }
-  });
+  }
 
   // Enter key untuk calculate
   display.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       calculate();
+    }
+  });
+
+  // Enter key untuk admin password
+  document.getElementById('adminPassword').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      submitAdminPassword();
     }
   });
 </script>
